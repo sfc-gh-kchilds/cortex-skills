@@ -1,12 +1,12 @@
 ---
 name: triage-lab-content
-description: "Analyze a GitLab/GitHub lab and recommend which sections to convert to interactive React course vs keep as lab format."
+description: "Analyze a GitLab/GitHub lab or Snowflake Quickstart and recommend which sections to convert to interactive React course vs keep as lab format."
 parent_skill: gitlab-to-react-course
 ---
 
 # Triage Lab Content
 
-Analyze lab content from GitLab or GitHub and produce a recommendation for what becomes an interactive React course lesson vs what stays in traditional lab format.
+Analyze lab content from GitLab, GitHub, or a Snowflake Quickstart and produce a recommendation for what becomes an interactive React course lesson vs what stays in traditional lab format.
 
 ## When to Load
 
@@ -23,11 +23,13 @@ Main skill routes here when user wants to analyze/assess a lab before building.
 
 Break the lab content into discrete sections. Look for:
 - **H1/H2 headers** as section boundaries
+- **Quickstart `## Step N` headers** — these are the primary section boundaries in sfguides (e.g., `## Step 1 - Overview`, `## Step 2 - Create Tables`). Lines with `Duration: N` immediately after indicate estimated minutes and can be used for course timing.
 - **SQL code blocks** — candidate for interactive exercises
 - **Step-by-step instructions** with explicit outcomes
 - **Conceptual explanations** — candidate for read-through lesson sections
 - **Setup/prerequisite blocks** — usually NOT interactive (infra config, account setup)
 - **Screenshots/images** — note these; they can become lesson section illustrations
+- **Quickstart metadata block** — the YAML-like frontmatter at the top of sfguide markdown (id, summary, categories, environments, status, tags, authors) should be captured for course metadata but is NOT lesson content
 
 Create a section inventory:
 ```
@@ -86,7 +88,7 @@ Group related sections into lessons (target 5-8 lessons per course):
 | 2 | ... | sql_fill | Section 3 | 1 fill-in-blank |
 | ...
 
-### Keep as GitLab/GitHub Lab
+### Keep as Original Lab / Quickstart
 
 | Section | Reason |
 |---------|--------|
